@@ -1,28 +1,47 @@
-// Importa React hooks si los necesitas (por ejemplo, useState)
-import { useState } from 'react'
+import React, { useRef } from "react";
+import { ThemeProvider } from "./components/theme-provider";
+import Navbar from "./components/Navbar";
+import HeroVideo from "./components/HeroVideo";
+import VideoControls from "./components/VideoControls";
+import AnimatedTitle from "./components/AnimatedTitle";
+import { Button } from "@/components/ui/button";
+import ModelosSection from "./components/ModelosSection";
 
-// Logos para mostrar si quieres usar imágenes en el futuro
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+function App() {
+  const videoRef = useRef(null);
 
-// Importa los estilos globales, incluyendo Tailwind CSS
-// Asegúrate de que index.css tenga: @import "tailwindcss";
-import './index.css'
-
-// Importa el componente Button desde tu carpeta UI
-import { Button } from '@/components/ui/button'
-
-// Componente principal de tu app
-export default function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-700 via-indigo-800 to-black text-white flex items-center justify-center flex-col gap-6">
-      {/* Título principal con estilos Tailwind */}
-      <h1 className="text-5xl font-bold underline">
-        🚀 Tailwind v4 funcionando
-      </h1>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div className="relative bg-white text-black dark:bg-zinc-900 dark:text-white transition-colors duration-500 min-h-screen outline-none focus:outline-none">
+        <Navbar />
+        <HeroVideo ref={videoRef} />
 
-      {/* Botón reutilizable con variante "outline" */}
-      <Button variant="outline">Click aquí</Button>
-    </div>
-  )
+        {/* Overlay para contraste */}
+        <div className="absolute inset-0 z-10 pointer-events-none">
+          <div className="w-full h-full bg-black/30 dark:bg-black/60 outline-none focus:outline-none"/>
+        </div>
+
+        {/* Contenido principal */}
+        <div className="relative z-20 flex flex-col items-center justify-center gap-6 h-screen outline-none focus:outline-none">
+          <AnimatedTitle />
+
+          {/* Botón estilo Lamborghini */}
+          <Button
+            variant="default"
+            size="lg"
+            className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600 text-black dark:text-white font-bold px-8 py-4 rounded-full shadow-lg hover:brightness-110 hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-white"
+          >
+            DESCUBRIR MÁS
+          </Button>
+        </div>
+
+        <VideoControls videoRef={videoRef} />
+
+        <ModelosSection />
+      </div>
+    </ThemeProvider>
+  );
 }
+
+export default App;
+
