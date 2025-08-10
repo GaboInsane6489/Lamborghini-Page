@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import {
     Carousel,
     CarouselContent,
@@ -53,24 +55,30 @@ export default function ModelosSection() {
                     <CarouselContent className="-ml-4 outline-none focus:outline-none">
                         {modelos.map((modelo, index) => (
                             <CarouselItem
-                                key={index}
-                                className="pl-4 md:basis-1/2 lg:basis-1/3 outline-none focus:outline-none"
+                                    key={index}
+                                    className="pl-4 md:basis-1/2 lg:basis-1/3 outline-none focus:outline-none"
                             >
-                                <div className="bg-zinc-900 rounded-xl overflow-hidden shadow-lg hover:scale-[1.02] transition outline-none focus:outline-none">
+                                <motion.div
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: index * 0.2 }}
+                                    whileHover={{ scale: 1.03 }}
+                                    className="bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-xl overflow-hidden shadow-xl transition-all"
+                                >
                                     <img
                                         src={modelo.imagen}
                                         alt={modelo.nombre}
-                                        className="w-full h-48 object-cover outline-none focus:outline-none"
+                                        className="w-full h-48 object-cover"
                                     />
-                                    <div className="p-4 space-y-2 outline-none focus:outline-none">
-                                        <h3 className="text-xl font-semibold outline-none focus:outline-none">{modelo.nombre}</h3>
-                                        <p className="text-sm text-zinc-400 outline-none focus:outline-none">{modelo.descripcion}</p>
-                                        <div className="flex justify-between text-sm text-zinc-300 outline-none focus:outline-none">
+                                    <div className="p-4 space-y-2">
+                                        <h3 className="text-xl font-semibold">{modelo.nombre}</h3>
+                                        <p className="text-sm text-zinc-400">{modelo.descripcion}</p>
+                                        <div className="flex justify-between text-sm text-zinc-300">
                                             <span>{modelo.año}</span>
                                             <span>{modelo.precio}</span>
                                         </div>
                                     </div>
-                                </div>
+                                </motion.div>
                             </CarouselItem>
                         ))}
                     </CarouselContent>

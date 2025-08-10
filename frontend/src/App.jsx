@@ -6,6 +6,7 @@ import VideoControls from "./components/VideoControls";
 import AnimatedTitle from "./components/AnimatedTitle";
 import { Button } from "@/components/ui/button";
 import ModelosSection from "./components/ModelosSection";
+import { motion } from "framer-motion";
 
 function App() {
   const videoRef = useRef(null);
@@ -26,13 +27,20 @@ function App() {
           <AnimatedTitle />
 
           {/* Botón estilo Lamborghini */}
-          <Button
-            variant="default"
-            size="lg"
-            className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600 text-black dark:text-white font-bold px-8 py-4 rounded-full shadow-lg hover:brightness-110 hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-white"
+          <motion.div
+            initial={{ opacity: 0, x: -50, y: 20 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+            className="absolute left-8 top-[65%]"
           >
-            DESCUBRIR MÁS
-          </Button>
+            <Button
+              variant="default"
+              size="lg"
+              className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600 text-black dark:text-white font-bold px-8 py-4 rounded-full shadow-lg hover:brightness-110 hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-white"
+            >
+              DESCUBRIR MÁS
+            </Button>
+          </motion.div>
         </div>
 
         <VideoControls videoRef={videoRef} />
