@@ -1,23 +1,30 @@
+/* 📦 Contenedor principal */
 #root {
-  max-width: 1280px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* 🚗 Logo con animación y sombra dinámica */
 .logo {
   height: 6em;
   padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+  will-change: filter, transform;
+  transition: filter 300ms, transform 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em var(--color-ring));
+  transform: scale(1.05);
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* 🔄 Animación de rotación */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -27,16 +34,28 @@
   }
 }
 
+/* 🧠 Accesibilidad: solo si no se prefiere reducir movimiento */
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
+  .logo.spin {
     animation: logo-spin infinite 20s linear;
   }
 }
 
+/* 💳 Tarjeta visual */
 .card {
   padding: 2em;
+  border-radius: var(--radius);
+  background: var(--color-input);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+.card:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
+/* 📘 Texto auxiliar */
 .read-the-docs {
   color: #888;
+  font-size: 0.875rem;
+  font-style: italic;
 }

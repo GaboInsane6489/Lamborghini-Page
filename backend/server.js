@@ -1,40 +1,44 @@
+// server.js
 
-// ✅ Importamos dependencias principales
+// 🧩 Dependencias principales
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
-// ✅ Importamos rutas de autenticación
+// 📦 Rutas del proyecto
 import authRoutes from "./routes/auth.js";
+import carritoRoutes from "./routes/carrito.js";
+import gameRoutes from "./routes/game.js";
 
-// ✅ Inicializamos la app
+// 🚀 Inicializamos la app
 const app = express();
 
-// ✅ Middleware para parsear JSON en las peticiones
-app.use(express.json());
-
-// ✅ Configuramos CORS antes de montar rutas
+// 🛡️ Middleware global
+app.use(express.json()); // Parseo de JSON
 app.use(cors({
-    origin: "http://localhost:5173", // permite peticiones desde tu frontend Vite
-    credentials: true,               // habilita cookies y headers personalizados
+    origin: "http://localhost:5173", // Frontend Vite
+    credentials: true               // Cookies y headers personalizados
 }));
 
-// ✅ Conexión a MongoDB (local)
+// 🔗 Conexión a MongoDB
 mongoose.connect("mongodb://localhost:27017/lamborghini")
     .then(() => console.log("✅ MongoDB conectado"))
     .catch((err) => console.error("❌ Error al conectar MongoDB:", err));
 
-// ✅ Ruta base para verificar que el backend está activo
+// 🧪 Ruta base para verificar estado del backend
 app.get("/", (req, res) => {
     res.send("API Lamborghini activa 🚀");
 });
 
-// ✅ Montamos las rutas de autenticación bajo /api
-app.use("/api", authRoutes);
+// 📌 Rutas principales
+app.use("/api", authRoutes);             // Autenticación
+app.use("/api/carrito", carritoRoutes);  // Carrito de compras
+app.use("/api/game", gameRoutes);        // Juegos o catálogo
 
-// ✅ Iniciamos el servidor en el puerto 5000
-app.listen(5000, () => {
-    console.log("🚀 Servidor corriendo en http://localhost:5000");
+// 🟢 Inicialización del servidor
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });
 
 

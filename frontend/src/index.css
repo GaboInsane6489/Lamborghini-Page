@@ -5,36 +5,46 @@
 :root {
   --radius: 0.625rem;
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --color-background: oklch(1 0 0);
+  --color-foreground: oklch(0.129 0.042 264.695);
 
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
+  --color-primary: oklch(0.208 0.042 265.755);
+  --color-primary-foreground: oklch(0.984 0.003 247.858);
 
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --color-border: oklch(0.929 0.013 255.508);
+  --color-input: oklch(0.929 0.013 255.508);
+  --color-ring: oklch(0.704 0.04 256.788);
 
-  /* Mas tokens aqui */
+  /* ✨ Más tokens visuales aquí */
 }
 
 /* 🌗 Modo oscuro */
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
+  /* Fondo y colores base */
+  --color-background: oklch(0.129 0.042 264.695);
+  --color-foreground: oklch(0.984 0.003 247.858);
 
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
+  /* Títulos y descripciones */
+  --color-title: oklch(0.98 0.04 265);       /* blanco vibrante con tinte azul */
+  --color-description: oklch(0.9 0.02 265);  /* gris claro con suavidad */
 
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
+  /* Colores primarios */
+  --color-primary: oklch(0.929 0.013 255.508);
+  --color-primary-foreground: oklch(0.208 0.042 265.755);
+
+  /* Bordes y efectos */
+  --color-border: oklch(1 0 0 / 10%);
+  --color-input: oklch(1 0 0 / 15%);
+  --color-ring: oklch(0.551 0.027 264.364);
 }
+
 
 /* 🧼 Estilos base */
 @layer base {
-  * {
-    border: 1px solid var(--color-border);
+  *,
+  *::before,
+  *::after {
+    border-color: var(--color-border);
     outline-color: var(--color-ring);
     outline-width: 1px;
     outline-style: solid;
@@ -43,10 +53,10 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: 'Inter', sans-serif; /* 🧵 Fuente base, puedes cambiarla por una premium */
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
-
-
 
 
 

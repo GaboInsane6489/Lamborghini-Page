@@ -1,28 +1,42 @@
+// routes/auth.js
+
+// 🔐 Rutas relacionadas con autenticación y gestión de usuarios
 import express from "express";
-import bcrypt from "bcryptjs";
-import User from "../models/User.js"; // Asegúrate que la ruta sea correcta
+import {
+    registerUser,
+    loginUser,
+    getUser,
+    updateUser
+} from "../controllers/authController.js";
 
 const router = express.Router();
 
-router.post("/register", async (req, res) => {
-    try {
-        const { name, email, password } = req.body;
+/**
+     *  @route   POST /api/auth/register
+     *  @desc    Registra un nuevo usuario
+     *  @access  Público
+*/
+router.post("/register", registerUser);
 
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: "El usuario ya existe" });
-        }
+/**
+     *  @route   POST /api/auth/login
+     *  @desc    Inicia sesión y devuelve token JWT
+     *  @access  Público
+*/
+router.post("/login", loginUser);
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+/**
+     *  @route   GET /api/auth/user/:id
+     *  @desc    Obtiene datos del usuario por ID
+     *  @access  Privado (requiere token)
+ */
+router.get("/user/:id", getUser);
 
-        const newUser = new User({ name, email, password: hashedPassword });
-        await newUser.save();
-
-        res.status(201).json({ message: "Usuario creado correctamente" });
-    } catch (error) {
-        console.error("Error en registro:", error);
-        res.status(500).json({ message: "Error al registrar usuario" });
-    }
-});
+/**
+     *  @route   PUT /api/auth/user/:id
+     *  @desc    Actualiza datos del usuario
+     *  @access  Privado (requiere token)
+*/
+router.put("/user/:id", updateUser);
 
 export default router;

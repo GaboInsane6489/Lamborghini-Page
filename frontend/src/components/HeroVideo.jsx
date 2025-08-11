@@ -15,12 +15,12 @@ const HeroVideo = forwardRef((props, ref) => {
                 onError={() => setVideoError(true)}
                 className="w-full h-full object-cover outline-none focus:outline-none"
             >
-            <source src="/video/Lamborghini_Aventador.mp4" type="video/mp4" />
+            <source src="/video/" type="video/Lamborghini Aventador.mp4"/>
                 Tu navegador no soporta el video.
                 </video>
         ) : (
             <img
-                src="/images/lambo-fallback.webp"
+                src="/images/wallpaper2.jpg"
                 alt="Lamborghini fondo"
                 className="w-full h-full object-cover"
             />
